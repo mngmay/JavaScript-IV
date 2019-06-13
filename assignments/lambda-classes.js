@@ -32,7 +32,13 @@ class Instructor extends Person{
         let amt = Math.floor(Math.random()*10)+1;
         let dice = Math.floor(Math.random()*10);
         if(student.grade === 100){
+            if(dice >=5){
             return `${this.name} needs to hold their horses - ${student.name} already has a perfect score of ${student.grade}.`
+            }
+            else{
+            student.grade -= amt;
+            return `${this.name} subtracted ${amt} points from ${student.name}'s grade for a total of ${student.grade}. Hopefully they do better next time.`
+            }
         }
         
         else if(student.grade + amt > 100){
@@ -45,7 +51,7 @@ class Instructor extends Person{
             return `${this.name} added ${amt} points to ${student.name}'s grade for a total of ${student.grade}. Keep up the great work!`
         }
         else{
-            student.grade += amt;
+            student.grade -= amt;
             return `${this.name} subtracted ${amt} points from ${student.name}'s grade for a total of ${student.grade}. Hopefully they do better next time.`
         }
     }
