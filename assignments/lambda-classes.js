@@ -27,6 +27,28 @@ class Instructor extends Person{
     grade(student, subject) {
         return `${student.name} receives a perfect score on ${subject}`
     }
+
+    points(student){
+        let amt = Math.floor(Math.random()*10)+1;
+        let dice = Math.floor(Math.random()*10);
+        if(student.grade === 100){
+            return `${this.name} needs to hold their horses - ${student.name} already has a perfect score of ${student.grade}.`
+        }
+        
+        else if(student.grade + amt > 100){
+            let newamt = 100-student.grade;
+            student.grade += newamt;
+            return `${this.name} added ${newamt} points to ${student.name}'s grade for a total of ${student.grade}. Keep up the great work!`
+        }
+        else if(dice >=5){
+            student.grade += amt;
+            return `${this.name} added ${amt} points to ${student.name}'s grade for a total of ${student.grade}. Keep up the great work!`
+        }
+        else{
+            student.grade += amt;
+            return `${this.name} subtracted ${amt} points from ${student.name}'s grade for a total of ${student.grade}. Hopefully they do better next time.`
+        }
+    }
 }
 
 class Student extends Person{
@@ -35,6 +57,7 @@ class Student extends Person{
         this.previousBackground = newStudent.previousBackground;
         this.className = newStudent.className;
         this.favSubjects = newStudent.favSubjects;
+        this.grade = newStudent.grade;
     }
 
     listsSubjects() {
@@ -48,6 +71,15 @@ class Student extends Person{
 
     sprintChallenge(subject){
         return `${this.name} has begun sprint challenge on ${subject}`
+    }
+
+    graduate(){
+        if(this.grade > 70){
+            return `Congratulations! ${this.name} has a grade of ${this.grade} and has graduated Lambda School!!! *party*`
+        }
+        else {
+            return `Looks like ${this.name} only has a grade of ${this.grade} and needs to study harder before they can graduate. Good luck, you got this!`
+        }
     }
 }
 
@@ -83,6 +115,7 @@ const dan = new Instructor({
     previousBackground: 'High School last month',
     className: 'Web21',
     favSubjects: ['Html', 'CSS', 'JavaScript'],
+    grade: 100
 });
     const kevin = new Student({
     name: "Kevin",
@@ -91,6 +124,7 @@ const dan = new Instructor({
     previousBackground: "Table Games Dealer",
     className: "WEB21",
     favSubjects: ['Html', 'CSS', 'JavaScript'],
+    grade: 85
 });
     const nisa = new Student({
     name: 'Nisa',
@@ -99,6 +133,7 @@ const dan = new Instructor({
     previousBackground: 'Debt Collector',
     className: 'Web21',
     favSubjects: ['Html', 'CSS', 'JavaScript'],
+    grade: 60
 });
 
     const joscelyn = new Student({
@@ -108,7 +143,9 @@ const dan = new Instructor({
     previousBackground: "English teacher",
     className: 'Web21',
     favSubjects: ["Computer Science", "Philosophy", "English"],
+    grade: 80
 });
+
 
   const marguel = new ProjectManager({
     name: 'Marguel',
@@ -197,3 +234,15 @@ console.log(nisa.PRAssignment('JavaScript'));
 console.log(kevin.sprintChallenge('JavaScript'));
 console.log(mary.standUp('Web21'));
 console.log(brandon.debugsCode(nisa, 'JavaScript'));
+console.log(joscelyn.grade);
+console.log(dan.points(kevin));
+console.log(marguel.points(nisa));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(dan.points(kevin));
+console.log(kevin.graduate());
+console.log(nisa.graduate());
